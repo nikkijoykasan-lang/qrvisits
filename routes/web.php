@@ -2,7 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmergencyListController;
+use App\Http\Controllers\GateController;
+use App\Http\Controllers\LiveBoardController;
+use App\Http\Controllers\PassScanController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StaffAccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserEmailResetNotificationController;
 use App\Http\Controllers\UserEmailVerificationController;
@@ -11,13 +18,50 @@ use App\Http\Controllers\UserPasskeyController;
 use App\Http\Controllers\UserPasswordController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserTwoFactorAuthenticationController;
+use App\Http\Controllers\VisitApprovalController;
+use App\Http\Controllers\VisitController;
+use App\Http\Controllers\VisitDenialController;
+use App\Http\Controllers\VisitExportController;
+use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', fn () => Inertia::render('Welcome'))->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function (): void {
-    Route::get('dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
+Route::middleware(['auth'])->group(function (): void {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Visits...
+    Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
+    Route::get('visits/create', [VisitController::class, 'create'])->name('visits.create');
+    Route::post('visits', [VisitController::class, 'store'])->name('visits.store');
+    Route::get('visits/{visit}', [VisitController::class, 'show'])->name('visits.show');
+    Route::delete('visits/{visit}', [VisitController::class, 'destroy'])->name('visits.destroy');
+
+    // Visit approvals and denials...
+    Route::get('approvals', [VisitApprovalController::class, 'index'])->name('approvals.index');
+    Route::post('visits/{visit}/approval', [VisitApprovalController::class, 'store'])->name('visits.approval.store');
+    Route::post('visits/{visit}/denial', [VisitDenialController::class, 'store'])->name('visits.denial.store');
+
+    // Walk-ins...
+    Route::get('walk-ins/create', [WalkInController::class, 'create'])->name('walk-ins.create');
+    Route::post('walk-ins', [WalkInController::class, 'store'])->name('walk-ins.store');
+
+    // Gate and monitoring...
+    Route::get('gate', [GateController::class, 'index'])->name('gate.index');
+    Route::post('gate/scan', PassScanController::class)->name('gate.scan');
+    Route::get('gate/board', [LiveBoardController::class, 'index'])->name('gate.board');
+    Route::get('emergency-list', EmergencyListController::class)->name('emergency-list');
+
+    // Reports...
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/export', VisitExportController::class)->name('reports.export');
+
+    // Staff accounts...
+    Route::get('staff', [StaffAccountController::class, 'index'])->name('staff.index');
+    Route::get('staff/create', [StaffAccountController::class, 'create'])->name('staff.create');
+    Route::post('staff', [StaffAccountController::class, 'store'])->name('staff.store');
+    Route::delete('staff/{user}', [StaffAccountController::class, 'destroy'])->name('staff.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {

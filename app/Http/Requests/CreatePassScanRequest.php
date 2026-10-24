@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Requests;
+
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Foundation\Http\FormRequest;
+
+final class CreatePassScanRequest extends FormRequest
+{
+    public function authorize(): Response
+    {
+        $user = $this->user();
+        assert($user instanceof User);
+
+        return $user->isStaff()
+            ? Response::allow()
+            : Response::denyAsNotFound();
+    }
+
+    /**
+     * @return array<string, array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'code' => ['required', 'string', 'max:20'],
+        ];
+    }
+}

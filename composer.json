@@ -19,7 +19,8 @@
         }
     ],
     "require": {
-        "php": "^8.5.0",
+        "php": "^8.4.0",
+        "bacon/bacon-qr-code": "^3.1.1",
         "inertiajs/inertia-laravel": "^3.5.1",
         "laravel/fortify": "^1.41.0",
         "laravel/framework": "^13.37.0",

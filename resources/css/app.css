@@ -170,3 +170,20 @@
         @apply bg-background text-foreground;
     }
 }
+
+@media print {
+    [data-slot='sidebar'],
+    [data-slot='sidebar-inset'] > header,
+    [data-slot='breadcrumb'] {
+        display: none !important;
+    }
+
+    [data-slot='sidebar-inset'] {
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    body {
+        background: #fff !important;
+    }
+}

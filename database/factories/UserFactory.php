@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +25,8 @@ final class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'role' => Role::Visitor,
+            'contact_number' => fake()->numerify('09#########'),
             'email_verified_at' => now(),
             'password' => self::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
@@ -37,6 +40,20 @@ final class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function admin(): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => Role::Admin,
+        ]);
+    }
+
+    public function guard(): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => Role::Guard,
         ]);
     }
 
