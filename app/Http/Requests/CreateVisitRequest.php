@@ -30,6 +30,7 @@ final class CreateVisitRequest extends FormRequest
             'host_name' => ['required', 'string', 'max:255'],
             'visit_date' => ['required', 'date', 'after_or_equal:today'],
             'visitor_contact' => ['required', 'string', 'min:7', 'max:20', 'regex:/^[0-9+()\-\s]+$/'],
+            'id_document' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
         ];
     }
 }

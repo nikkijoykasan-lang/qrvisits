@@ -122,6 +122,24 @@ defineProps<{
                             </div>
                         </div>
 
+                        <div class="grid gap-2">
+                            <Label for="id_document">Valid ID *</Label>
+                            <Input
+                                id="id_document"
+                                name="id_document"
+                                type="file"
+                                required
+                                accept="image/jpeg,image/png,application/pdf"
+                                class="cursor-pointer file:mr-3 file:rounded-md file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-sm file:font-medium"
+                            />
+                            <p class="text-xs text-muted-foreground">
+                                Upload a photo or scan of a school ID, driver's
+                                license, passport, or other government ID. JPG,
+                                PNG or PDF, up to 2 MB.
+                            </p>
+                            <InputError :message="errors.id_document" />
+                        </div>
+
                         <div class="flex flex-wrap gap-2">
                             <Button type="submit" :disabled="processing">
                                 <Spinner v-if="processing" />

@@ -19,7 +19,7 @@ Visitors are logged in a paper notebook at the guard house. Handwriting is slow,
 ## Scope (version 1)
 
 - One campus, one gate.
-- Visitors register an account and request a visit for a specific date.
+- Visitors register an account and request a visit for a specific date, including a valid ID upload.
 - Admin approves or denies requests and issues QR passes.
 - Guards scan passes with a webcam, with manual code entry as a fallback.
 - Walk-in visitors are registered by the guard and approved by the admin.
@@ -40,6 +40,7 @@ Visitors are logged in a paper notebook at the guard house. Handwriting is slow,
 ## Limitations and assumptions
 
 - Requires an internet connection at the gate.
+- ID uploads are limited to 2 MB by the current PHP upload configuration.
 - Information is typed at registration; the system does not verify identity documents.
 - One QR pass is valid for the visit date it was approved for.
 - Visitors do not need a verified email address to use the system (approval by the admin is the security control); guards and admin accounts are created by an admin.

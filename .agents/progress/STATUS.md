@@ -13,6 +13,20 @@
 - **Verified in a real browser:** visitor login → dashboard → "Request a visit" → form → submit → pending visit page; admin approvals page; guard walk-in page and gate scan page, with no JavaScript errors.
 - **Regression tests added:** the request form pages render for the right roles and are hidden from the wrong ones (+3 tests; 218 total in Feature + Unit).
 
+## Fix — "id document failed to upload"
+
+- **Cause:** PHP had no writable temporary folder configured for the process serving the app (`sys_temp_dir` and `upload_tmp_dir` were empty, so it fell back to `C:\WINDOWS`).
+- **Fix:** pinned both settings to `C:\Users\PC\AppData\Local\Temp` in Herd's PHP 8.4 `php.ini`, and raised `upload_max_filesize` / `post_max_size` from 2M to 8M so a 2 MB file plus form overhead fits.
+- **Backup:** `C:\Users\PC\.config\herd\bin\php84\php.ini.backup-qrvisits`.
+- Verified by uploading a real PNG through the browser and opening the saved file. The app still limits uploads to 2 MB.
+
+## Change — valid ID upload- Visitors must now upload a valid ID (JPG, PNG or PDF, up to 2 MB) when requesting a visit.
+- Files are stored on the private disk (`storage/app/private/visitor-ids`) and are not publicly accessible. The owner of the visit and staff can view them; other visitors get "not found".
+- Admin approvals show a "View ID" link; the visit detail page shows "View uploaded ID" and the original file name. Walk-ins show "No ID uploaded".
+- Uploaded files are deleted when a pending request is cancelled.
+- Demo data and existing visits have no ID, which is expected.
+- Verified in a real browser: upload → visit created → file saved → link served. (A sandbox-only PHP temp-folder issue was worked around for testing; normal terminals are unaffected.)
+
 ## Change — expected arrival removed from visitor requests
 
 - The "Expected arrival" field was removed from the visitor's **Request a visit** form at the user's request.
@@ -41,7 +55,7 @@
 
 | Check | Result |
 | --- | --- |
-| `php artisan test tests/Feature tests/Unit` | 216 passed, 2 failed (pre-existing ArchTest provider rules) |
+| `php artisan test tests/Feature tests/Unit` | 221 passed, 2 failed (pre-existing ArchTest provider rules) |
 | QRVisits feature tests (visits, approvals, scan, walk-ins, reports, staff, dashboards) | all passing |
 | `npm run test:types` (vue-tsc) | passed |
 | `npx vp lint` | passed |

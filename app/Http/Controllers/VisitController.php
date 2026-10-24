@@ -16,6 +16,7 @@ use App\Models\Visit;
 use App\Services\VisitPresenter;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -92,7 +93,7 @@ final readonly class VisitController
             'visitor_contact',
         ]);
 
-        $visit = $action->handle($user, $attributes);
+        $visit = $action->handle($user, $attributes, $this->idDocument($request));
 
         Inertia::flash('toast', [
             'type' => 'success',
@@ -124,5 +125,12 @@ final readonly class VisitController
         ]);
 
         return to_route('visits.index');
+    }
+
+    private function idDocument(CreateVisitRequest $request): ?UploadedFile
+    {
+        $file = $request->file('id_document');
+
+        return $file instanceof UploadedFile ? $file : null;
     }
 }

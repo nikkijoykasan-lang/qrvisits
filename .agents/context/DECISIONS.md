@@ -8,7 +8,7 @@
 - **D4 — Roles:** guards and an admin operate the system. Visitors also have their own accounts and pre-register.
 - **D5 — Approval:** the admin approves or denies every visit request before a pass is issued.
 - **D6 — Walk-ins:** the guard registers a walk-in on the spot and the admin approves it quickly.
-- **D7 — Visitor data:** basic details only — full name, contact number, purpose, person/department to visit, date, time-in and time-out. No photos, ID numbers or addresses.
+- **D7 — Visitor data:** basic details only — full name, contact number, purpose, person/department to visit, date, time-in and time-out. A **valid ID document upload** was added at the user's request; no visitor photo is taken and no ID number is typed in.
 - **D8 — Live monitoring:** the live "who is inside now" view and a printable emergency list are essential.
 - **D9 — Devices:** desktop/laptop with webcam at the guard house; admin uses an office computer.
 - **D10 — Context:** school capstone project; deadline not fixed yet, so build a tight, demo-ready first version.
@@ -23,6 +23,7 @@
 - **T6 — Authorization:** all checks live in form requests, per project conventions. No policies or gates.
 - **T7 — Roles:** stored as a `role` string column on `users`, cast to a PHP enum.
 - **T8 — PHP version:** the project targets PHP 8.4 (`composer.json` `^8.4.0`, `.php-version` set to `8.4`) so it runs on the PHP version bundled with Herd. No installed package requires PHP 8.5.
+- **T9 — ID document storage:** uploaded IDs are stored on the private `local` disk under `visitor-ids/`, never in the public folder. They are served through an authorised route to the visitor who owns the visit and to staff only. Uploads accept JPG, PNG or PDF up to 2 MB (the server's current upload limit). Files are deleted when a pending request is cancelled.
 
 ## Assumptions
 

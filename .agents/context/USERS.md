@@ -2,7 +2,7 @@
 
 ## Visitor
 - Creates an account with name, email, password and contact number.
-- Submits a visit request: purpose, person/department to visit, and visit date.
+- Submits a visit request: purpose, person/department to visit, visit date, and a valid ID upload.
 - Sees the status of each request and the QR pass once approved.
 - Shows the QR pass at the gate.
 - Can cancel a request that is still pending.

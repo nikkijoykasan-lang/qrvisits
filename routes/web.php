@@ -22,6 +22,7 @@ use App\Http\Controllers\VisitApprovalController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\VisitDenialController;
 use App\Http\Controllers\VisitExportController;
+use App\Http\Controllers\VisitIdDocumentController;
 use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +37,7 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('visits/create', [VisitController::class, 'create'])->name('visits.create');
     Route::post('visits', [VisitController::class, 'store'])->name('visits.store');
     Route::get('visits/{visit}', [VisitController::class, 'show'])->name('visits.show');
+    Route::get('visits/{visit}/id-document', VisitIdDocumentController::class)->name('visits.id-document');
     Route::delete('visits/{visit}', [VisitController::class, 'destroy'])->name('visits.destroy');
 
     // Visit approvals and denials...

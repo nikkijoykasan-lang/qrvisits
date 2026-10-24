@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string|null $pass_code
  * @property-read string|null $denial_reason
  * @property-read bool $is_walk_in
+ * @property-read string|null $id_document_path
+ * @property-read string|null $id_document_name
  * @property-read CarbonInterface|null $approved_at
  * @property-read string|null $approved_by
  * @property-read CarbonInterface|null $time_in
@@ -62,6 +64,8 @@ final class Visit extends Model
             'pass_code' => 'string',
             'denial_reason' => 'string',
             'is_walk_in' => 'boolean',
+            'id_document_path' => 'string',
+            'id_document_name' => 'string',
             'approved_at' => 'datetime',
             'approved_by' => 'string',
             'time_in' => 'datetime',

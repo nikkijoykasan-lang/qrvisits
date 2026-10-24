@@ -15,7 +15,8 @@ Status values: `planned`, `in progress`, `done`, `deferred`.
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Visitor submits a visit request | done | Purpose, host, date, contact number |
+| Visitor submits a visit request | done | Purpose, host, date, contact number, valid ID |
+| Visitor uploads a valid ID | done | JPG, PNG or PDF up to 2 MB; stored privately; visible to the owner and staff |
 | Admin approves a request and issues a pass | done | Random pass code generated at approval |
 | Admin denies a request with a reason | done | Reason shown to the visitor |
 | Visitor views and prints a QR pass | done | QR generated server-side as an SVG data URI |
@@ -46,7 +47,7 @@ Status values: `planned`, `in progress`, `done`, `deferred`.
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Overstay alerts | deferred | Needs background checks |
-| Visitor photo / ID capture | deferred | Privacy-heavy |
+| Visitor photo / ID capture | deferred | Visitor photos are not captured; uploaded ID documents are supported |
 | Host/staff approval role | deferred | Adds another account type |
 | Email/SMS notifications | deferred | Needs mail provider |
 | Offline scanning | deferred | Out of scope |

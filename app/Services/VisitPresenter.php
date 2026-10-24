@@ -35,6 +35,10 @@ final readonly class VisitPresenter
             'pass_code' => $visit->pass_code,
             'denial_reason' => $visit->denial_reason,
             'is_walk_in' => $visit->is_walk_in,
+            'id_document_name' => $visit->id_document_name,
+            'id_document_url' => $visit->id_document_path !== null
+                ? route('visits.id-document', $visit)
+                : null,
             'approved_at' => $visit->approved_at?->toIso8601String(),
             'approved_by_name' => $visit->approver?->name,
             'time_in' => $visit->time_in?->toIso8601String(),

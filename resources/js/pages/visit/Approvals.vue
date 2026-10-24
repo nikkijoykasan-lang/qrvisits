@@ -81,12 +81,23 @@ defineProps<{
                             {{ visit.purpose }}
                         </p>
                     </div>
-                    <Link
-                        :href="show(visit.id)"
-                        class="text-xs font-medium underline underline-offset-4"
-                    >
-                        Details
-                    </Link>
+                    <div class="flex shrink-0 items-center gap-3">
+                        <a
+                            v-if="visit.id_document_url"
+                            :href="visit.id_document_url"
+                            target="_blank"
+                            rel="noopener"
+                            class="text-xs font-medium underline underline-offset-4"
+                        >
+                            View ID
+                        </a>
+                        <Link
+                            :href="show(visit.id)"
+                            class="text-xs font-medium underline underline-offset-4"
+                        >
+                            Details
+                        </Link>
+                    </div>
                 </CardHeader>
                 <CardContent class="space-y-4">
                     <dl class="grid gap-3 text-sm sm:grid-cols-2">

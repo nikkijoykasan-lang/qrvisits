@@ -138,3 +138,13 @@ Unit tests:
 
 - Browser camera support differs; manual code entry must always work.
 - The project targets PHP 8.4 so it runs with the PHP version bundled with Herd.
+
+## 10. Feature addition — valid ID upload
+
+- [x] Add id_document_path and id_document_name to visits.
+- [x] Validate JPG/PNG/PDF uploads up to 2 MB on the visit request form.
+- [x] Store files on the private disk and delete them when a pending request is cancelled.
+- [x] Serve files through an authorised route (owner or staff only).
+- [x] Show the upload on the request form, visit detail and approval queue.
+- [x] Feature tests for required upload, file type, access control and missing files.
+

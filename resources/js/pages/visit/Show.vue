@@ -4,6 +4,7 @@ import {
     ArrowLeft,
     BadgeCheck,
     Clock3,
+    FileText,
     MapPin,
     Printer,
     QrCode,
@@ -387,6 +388,37 @@ const printPass = (): void => {
                                         Purpose
                                     </dt>
                                     <dd>{{ visit.purpose }}</dd>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <FileText
+                                    class="mt-0.5 size-4 shrink-0 text-muted-foreground"
+                                />
+                                <div class="min-w-0">
+                                    <dt
+                                        class="text-xs text-muted-foreground uppercase"
+                                    >
+                                        Valid ID
+                                    </dt>
+                                    <dd v-if="visit.id_document_url">
+                                        <a
+                                            :href="visit.id_document_url"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="font-medium underline underline-offset-4"
+                                        >
+                                            View uploaded ID
+                                        </a>
+                                        <span
+                                            v-if="visit.id_document_name"
+                                            class="block truncate text-xs text-muted-foreground"
+                                        >
+                                            {{ visit.id_document_name }}
+                                        </span>
+                                    </dd>
+                                    <dd v-else class="text-muted-foreground">
+                                        No ID uploaded
+                                    </dd>
                                 </div>
                             </div>
                         </dl>

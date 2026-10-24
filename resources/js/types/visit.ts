@@ -19,6 +19,8 @@ export type Visit = {
     pass_code: string | null;
     denial_reason: string | null;
     is_walk_in: boolean;
+    id_document_name: string | null;
+    id_document_url: string | null;
     approved_at: string | null;
     approved_by_name: string | null;
     time_in: string | null;
