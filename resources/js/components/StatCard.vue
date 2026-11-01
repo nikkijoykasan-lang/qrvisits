@@ -31,7 +31,7 @@ defineProps<{
             </div>
             <div
                 v-if="icon"
-                class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground"
+                class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"
             >
                 <component :is="icon" class="size-4" />
             </div>

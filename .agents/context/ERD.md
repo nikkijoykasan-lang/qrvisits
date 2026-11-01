@@ -1,5 +1,8 @@
 # QRVisits — Entity Relationship Diagram (ERD)
 
+> **Interactive version:** open **`/context/erd`** in the running app for the
+> rendered diagram, database structure tables and a print button.
+
 Physical ERD for the application as built. Mermaid renders on GitHub and in
 Markdown previews.
 

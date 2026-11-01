@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\ContextErdController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmergencyListController;
 use App\Http\Controllers\GateController;
@@ -58,6 +59,9 @@ Route::middleware(['auth'])->group(function (): void {
     // Reports...
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/export', VisitExportController::class)->name('reports.export');
+
+    // Documentation...
+    Route::get('context/erd', ContextErdController::class)->name('context.erd');
 
     // Staff accounts...
     Route::get('staff', [StaffAccountController::class, 'index'])->name('staff.index');

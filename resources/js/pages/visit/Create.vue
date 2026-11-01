@@ -116,9 +116,7 @@ defineProps<{
                                     :default-value="defaults.visitor_contact"
                                     placeholder="09XXXXXXXXX"
                                 />
-                                <InputError
-                                    :message="errors.visitor_contact"
-                                />
+                                <InputError :message="errors.visitor_contact" />
                             </div>
                         </div>
 

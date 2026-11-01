@@ -1,5 +1,8 @@
 # QRVisits — Context and Data Flow Diagrams
 
+> **Interactive version:** open **`/context/erd`** in the running app for the
+> ERD, database structure tables and a print button.
+
 Mermaid diagrams for the capstone documentation. They render automatically on
 GitHub, GitLab, and VS Code with a Mermaid preview extension.
 

@@ -13,6 +13,23 @@
 - **Verified in a real browser:** visitor login → dashboard → "Request a visit" → form → submit → pending visit page; admin approvals page; guard walk-in page and gate scan page, with no JavaScript errors.
 - **Regression tests added:** the request form pages render for the right roles and are hidden from the wrong ones (+3 tests; 218 total in Feature + Unit).
 
+## Change — dark-green and white UI theme
+
+- Reworked the colour palette to dark green + white: deep green sidebar, white content surfaces, green primary actions, subtle green page glow.
+- Dark mode uses a deep green background with brighter green actions and clear card separation.
+- Increased the corner radius for a more modern feel.
+- Replaced the Laravel starter welcome page with a QRVisits landing page: product summary, feature cards, sample visitor pass, and the same login/register/dashboard links.
+- Branding changed to “QRVisits” via `APP_NAME` (`.env` and `.env.example`).
+- Visual-only change: no routes, controllers, validation, or business logic were modified.
+- Verified with browser screenshots at 1440×900 and 390×844 in light and dark mode.
+
+- Added an interactive, printable database page for documentation.
+- ERD renders with **Mermaid loaded from a pinned CDN** (`mermaid@11.4.1`); if the CDN is unreachable the page shows a short note and the structure tables still work.
+- Shows only the tables in the visitor flow: `users` and `visits` (no passkeys, sessions, password resets or framework tables).
+- Includes full database structure tables (column, type, key, nullable, default, notes) and a print button.
+- Requires login.
+- Verified in a real browser: diagram renders, tables present, no JavaScript errors.
+
 ## Fix — "id document failed to upload"
 
 - **Cause:** PHP had no writable temporary folder configured for the process serving the app (`sys_temp_dir` and `upload_tmp_dir` were empty, so it fell back to `C:\WINDOWS`).
@@ -55,7 +72,7 @@
 
 | Check | Result |
 | --- | --- |
-| `php artisan test tests/Feature tests/Unit` | 221 passed, 2 failed (pre-existing ArchTest provider rules) |
+| `php artisan test tests/Feature tests/Unit` | 223 passed, 2 failed (pre-existing ArchTest provider rules) |
 | QRVisits feature tests (visits, approvals, scan, walk-ins, reports, staff, dashboards) | all passing |
 | `npm run test:types` (vue-tsc) | passed |
 | `npx vp lint` | passed |
