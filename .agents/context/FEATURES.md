@@ -16,6 +16,7 @@ Status values: `planned`, `in progress`, `done`, `deferred`.
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Visitor submits a visit request | done | Purpose, host, date, contact number, valid ID |
+| Visitor sets an expected time-out | done | Required on visitor requests; guards set it for walk-ins |
 | Visitor uploads a valid ID | done | JPG, PNG or PDF up to 2 MB; stored privately; visible to the owner and staff |
 | Admin approves a request and issues a pass | done | Random pass code generated at approval |
 | Admin denies a request with a reason | done | Reason shown to the visitor |
@@ -33,6 +34,7 @@ Status values: `planned`, `in progress`, `done`, `deferred`.
 | Live "inside now" board | done | Polls every 15 seconds with partial reloads |
 | Today's expected visitors | done | Approved visits for today |
 | Printable emergency visitor list | done | Standalone printable page |
+| Automated overdue alerts | done | Header bell + toast for guards/admins when an inside visitor passes their expected time-out; shows name, pass code (ID), expected time-out and minutes late |
 
 ## Records and reports
 
@@ -46,7 +48,7 @@ Status values: `planned`, `in progress`, `done`, `deferred`.
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Overstay alerts | deferred | Needs background checks |
+| Overstay alerts | deferred | Live in-app overdue alerts are implemented; SMS/email escalation is deferred |
 | Visitor photo / ID capture | deferred | Visitor photos are not captured; uploaded ID documents are supported |
 | Host/staff approval role | deferred | Adds another account type |
 | Email/SMS notifications | deferred | Needs mail provider |

@@ -24,6 +24,7 @@
 - **T7 — Roles:** stored as a `role` string column on `users`, cast to a PHP enum.
 - **T8 — PHP version:** the project targets PHP 8.4 (`composer.json` `^8.4.0`, `.php-version` set to `8.4`) so it runs on the PHP version bundled with Herd. No installed package requires PHP 8.5.
 - **T9 — ID document storage:** uploaded IDs are stored on the private `local` disk under `visitor-ids/`, never in the public folder. They are served through an authorised route to the visitor who owns the visit and to staff only. Uploads accept JPG, PNG or PDF up to 2 MB (the server's current upload limit). Files are deleted when a pending request is cancelled.
+- **T10 — Expected time-out and overdue alerts:** `visits.expected_time_out` is required on new visitor requests and walk-ins. A visit is overdue when its status is `inside` and the current time is past the visit date + expected time-out. The guard/admin header polls `/alerts/overdue` every 30 seconds and shows a bell badge, dropdown and warning toast with visitor name, pass code, expected time-out and minutes late. Alerts disappear once the visitor is checked out. This requires no scheduler.
 
 ## Assumptions
 

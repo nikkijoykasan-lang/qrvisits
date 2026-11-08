@@ -31,6 +31,7 @@ final class CreateWalkInRequest extends FormRequest
             'purpose' => ['required', 'string', 'max:255'],
             'host_name' => ['required', 'string', 'max:255'],
             'expected_arrival' => ['nullable', 'date_format:H:i'],
+            'expected_time_out' => ['required', 'date_format:H:i'],
         ];
     }
 }

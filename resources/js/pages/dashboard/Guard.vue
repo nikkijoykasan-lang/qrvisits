@@ -5,6 +5,7 @@ import {
     ClipboardList,
     ScanLine,
     Siren,
+    TriangleAlert,
     UserPlus,
     Users,
 } from '@lucide/vue';
@@ -93,7 +94,7 @@ const quickActions = [
             </p>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
             <StatCard
                 label="Inside now"
                 :value="stats.inside"
@@ -116,6 +117,12 @@ const quickActions = [
                 :value="stats.pending"
                 hint="Admin must approve these"
                 :icon="ClipboardList"
+            />
+            <StatCard
+                label="Overdue"
+                :value="stats.overdue"
+                hint="Past expected time-out"
+                :icon="TriangleAlert"
             />
         </div>
 

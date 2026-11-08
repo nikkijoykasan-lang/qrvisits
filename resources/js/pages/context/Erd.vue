@@ -69,6 +69,7 @@ const erdDefinition = `erDiagram
         string host_name
         date visit_date
         time expected_arrival "nullable, legacy"
+        time expected_time_out "nullable"
         string status "pending | approved | denied | inside | completed"
         string pass_code UK "nullable until approved"
         text denial_reason "nullable"
@@ -299,6 +300,12 @@ const visitColumns: Column[] = [
         type: 'time',
         nullable: true,
         notes: 'Legacy field; not collected on new requests.',
+    },
+    {
+        name: 'expected_time_out',
+        type: 'time',
+        nullable: true,
+        notes: 'Expected leaving time; drives overdue alerts.',
     },
     {
         name: 'status',

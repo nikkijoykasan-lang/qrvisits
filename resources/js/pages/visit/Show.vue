@@ -9,6 +9,7 @@ import {
     Printer,
     QrCode,
     ShieldCheck,
+    TriangleAlert,
     User,
 } from '@lucide/vue';
 import { index as gateIndex } from '@/actions/App/Http/Controllers/GateController';
@@ -207,6 +208,25 @@ const printPass = (): void => {
             </div>
         </div>
 
+        <div
+            v-if="visit.is_overdue"
+            class="flex items-start gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-200"
+        >
+            <TriangleAlert
+                class="mt-0.5 size-5 shrink-0 text-amber-600 dark:text-amber-400"
+            />
+            <div>
+                <p class="font-medium">
+                    This visitor is overdue by
+                    {{ visit.overdue_minutes }} minutes.
+                </p>
+                <p class="text-amber-800/80 dark:text-amber-200/70">
+                    Expected out at {{ visit.expected_time_out }}. Scan the pass
+                    again once they leave.
+                </p>
+            </div>
+        </div>
+
         <div class="grid gap-6 lg:grid-cols-3">
             <div class="space-y-6 lg:col-span-2">
                 <Card v-if="visit.pass_code" class="overflow-hidden">
@@ -374,6 +394,20 @@ const printPass = (): void => {
                                     >
                                         Expected
                                         {{ formatTime(visit.expected_arrival) }}
+                                    </dd>
+                                    <dd
+                                        v-if="visit.expected_time_out"
+                                        class="text-sm"
+                                        :class="
+                                            visit.is_overdue
+                                                ? 'font-medium text-amber-700 dark:text-amber-300'
+                                                : 'text-muted-foreground'
+                                        "
+                                    >
+                                        Expected out
+                                        {{
+                                            formatTime(visit.expected_time_out)
+                                        }}
                                     </dd>
                                 </div>
                             </div>

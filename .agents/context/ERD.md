@@ -48,6 +48,7 @@ erDiagram
         string host_name
         date visit_date
         time expected_arrival "nullable, legacy"
+        time expected_time_out "nullable"
         string status "pending | approved | denied | inside | completed"
         string pass_code UK "nullable until approved"
         text denial_reason "nullable"
@@ -159,6 +160,7 @@ visitor data while the audit reference becomes null (`nullOnDelete`).
 | `host_name` | string | required, max 255 | Person or office being visited |
 | `visit_date` | date | required, today or later at submission | Day the pass is valid |
 | `expected_arrival` | time | nullable | Legacy field; no longer collected on new requests |
+| `expected_time_out` | time | nullable | Expected leaving time; used to flag overdue visitors |
 | `status` | string | pending / approved / denied / inside / completed | Current stage of the visit |
 | `pass_code` | string(12) | unique, nullable | Short code encoded in the QR pass |
 | `denial_reason` | text | nullable | Reason shown to the visitor when denied |

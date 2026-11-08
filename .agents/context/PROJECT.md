@@ -35,11 +35,11 @@ Visitors are logged in a paper notebook at the guard house. Handwriting is slow,
 - SMS or email notifications of approval.
 - Host/staff approval role.
 - Student attendance QR codes.
-- Automatic overstay alerts.
 
 ## Limitations and assumptions
 
 - Requires an internet connection at the gate.
+- Overdue alerts are in-app only (header bell + toast) and poll every 30 seconds while the app is open; there is no SMS/email escalation yet.
 - ID uploads are limited to 2 MB by the current PHP upload configuration.
 - Information is typed at registration; the system does not verify identity documents.
 - One QR pass is valid for the visit date it was approved for.

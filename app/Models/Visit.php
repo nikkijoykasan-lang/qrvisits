@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string $host_name
  * @property-read CarbonInterface $visit_date
  * @property-read string|null $expected_arrival
+ * @property-read string|null $expected_time_out
  * @property-read VisitStatus $status
  * @property-read string|null $pass_code
  * @property-read string|null $denial_reason
@@ -60,6 +61,7 @@ final class Visit extends Model
             'host_name' => 'string',
             'visit_date' => 'date',
             'expected_arrival' => 'string',
+            'expected_time_out' => 'string',
             'status' => VisitStatus::class,
             'pass_code' => 'string',
             'denial_reason' => 'string',
@@ -121,6 +123,44 @@ final class Visit extends Model
     public function isInside(): bool
     {
         return $this->status === VisitStatus::Inside;
+    }
+
+    /**
+     * The moment the visitor is expected to have left the campus.
+     */
+    public function expectedTimeOutAt(): ?CarbonInterface
+    {
+        if ($this->expected_time_out === null) {
+            return null;
+        }
+
+        return $this->visit_date->copy()->setTimeFromTimeString($this->expected_time_out);
+    }
+
+    /**
+     * A visitor is overdue when they are still inside after their expected time-out.
+     */
+    public function isOverdue(?CarbonInterface $at = null): bool
+    {
+        if ($this->status !== VisitStatus::Inside) {
+            return false;
+        }
+
+        $expected = $this->expectedTimeOutAt();
+
+        return $expected instanceof CarbonInterface
+            && ($at ?? now())->greaterThan($expected);
+    }
+
+    public function overdueMinutes(?CarbonInterface $at = null): int
+    {
+        $expected = $this->expectedTimeOutAt();
+
+        if (! $expected instanceof CarbonInterface) {
+            return 0;
+        }
+
+        return max(0, (int) $expected->diffInMinutes($at ?? now(), false));
     }
 
     /**

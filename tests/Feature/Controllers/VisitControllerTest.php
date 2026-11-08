@@ -37,6 +37,7 @@ it('lets a visitor request a visit', function (): void {
         'host_name' => 'Registrar Office',
         'visit_date' => now()->addDay()->toDateString(),
         'visitor_contact' => '09171234567',
+        'expected_time_out' => '17:00',
         'id_document' => UploadedFile::fake()->image('school-id.jpg'),
     ]);
 
@@ -51,6 +52,7 @@ it('lets a visitor request a visit', function (): void {
         ->and($visit->visitor_name)->toBe($visitor->name)
         ->and($visit->pass_code)->toBeNull()
         ->and($visit->expected_arrival)->toBeNull()
+        ->and($visit->expected_time_out)->toStartWith('17:00')
         ->and($visit->id_document_name)->toBe('school-id.jpg')
         ->and($visit->id_document_path)->not->toBeNull();
 
@@ -65,6 +67,7 @@ it('requires a valid id document', function (): void {
         'host_name' => 'Registrar Office',
         'visit_date' => now()->toDateString(),
         'visitor_contact' => '09171234567',
+        'expected_time_out' => '17:00',
     ])->assertSessionHasErrors('id_document');
 
     expect(Visit::query()->count())->toBe(0);
@@ -78,6 +81,7 @@ it('rejects an unsupported id document type', function (): void {
         'host_name' => 'Registrar Office',
         'visit_date' => now()->toDateString(),
         'visitor_contact' => '09171234567',
+        'expected_time_out' => '17:00',
         'id_document' => UploadedFile::fake()->create('notes.txt', 10, 'text/plain'),
     ])->assertSessionHasErrors('id_document');
 
@@ -92,6 +96,7 @@ it('rejects a visit date in the past', function (): void {
         'host_name' => 'Registrar Office',
         'visit_date' => now()->subDay()->toDateString(),
         'visitor_contact' => '09171234567',
+        'expected_time_out' => '17:00',
     ]);
 
     $response->assertSessionHasErrors('visit_date');
@@ -153,6 +158,7 @@ it('blocks staff from creating visitor requests', function (): void {
             'host_name' => 'Office',
             'visit_date' => now()->toDateString(),
             'visitor_contact' => '09171234567',
+            'expected_time_out' => '17:00',
         ])
         ->assertNotFound();
 

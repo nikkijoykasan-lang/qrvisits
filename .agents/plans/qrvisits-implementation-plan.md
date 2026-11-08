@@ -148,3 +148,13 @@ Unit tests:
 - [x] Show the upload on the request form, visit detail and approval queue.
 - [x] Feature tests for required upload, file type, access control and missing files.
 
+
+## 11. Feature addition - expected time-out and overdue alerts
+
+- [x] Add expected_time_out to visits and require it on visitor and walk-in requests.
+- [x] Overdue helper on the Visit model (inside + past expected time-out).
+- [x] Guard/admin alert endpoint with name, pass code, expected time-out and minutes late.
+- [x] Header bell, polling, toast and dashboard overdue counts.
+- [x] Overdue banner on visit details; alerts clear after checkout.
+- [x] Tests for detection, access control and validation.
+

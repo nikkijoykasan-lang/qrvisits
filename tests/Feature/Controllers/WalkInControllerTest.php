@@ -23,6 +23,7 @@ it('lets a guard register a walk-in visitor', function (): void {
         'visitor_contact' => '09181110001',
         'purpose' => 'Delivery of school supplies',
         'host_name' => 'Supply Office',
+        'expected_time_out' => '16:00',
         'expected_arrival' => '10:15',
     ]);
 
@@ -36,6 +37,7 @@ it('lets a guard register a walk-in visitor', function (): void {
         ->and($visit->is_walk_in)->toBeTrue()
         ->and($visit->user_id)->toBeNull()
         ->and($visit->visitor_name)->toBe('Pedro Reyes')
+        ->and($visit->expected_time_out)->toStartWith('16:00')
         ->and($visit->visit_date->toDateString())->toBe(now()->toDateString());
 });
 
@@ -62,6 +64,7 @@ it('blocks visitors from registering walk-ins', function (): void {
             'visitor_contact' => '09181110001',
             'purpose' => 'Test',
             'host_name' => 'Office',
+            'expected_time_out' => '16:00',
         ])
         ->assertNotFound();
 });

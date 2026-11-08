@@ -20,19 +20,21 @@ final readonly class WalkInController
         return Inertia::render('walk-in/Create', [
             'defaults' => [
                 'expected_arrival' => now()->format('H:i'),
+                'expected_time_out' => now()->addHours(2)->format('H:i'),
             ],
         ]);
     }
 
     public function store(CreateWalkInRequest $request, #[CurrentUser] User $user, CreateWalkIn $action): RedirectResponse
     {
-        /** @var array{visitor_name: string, visitor_contact: string, purpose: string, host_name: string, expected_arrival?: string|null} $attributes */
+        /** @var array{visitor_name: string, visitor_contact: string, purpose: string, host_name: string, expected_arrival?: string|null, expected_time_out: string} $attributes */
         $attributes = $request->safe()->only([
             'visitor_name',
             'visitor_contact',
             'purpose',
             'host_name',
             'expected_arrival',
+            'expected_time_out',
         ]);
 
         $visit = $action->handle($user, $attributes);

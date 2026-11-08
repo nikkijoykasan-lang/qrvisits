@@ -32,6 +32,7 @@ defineOptions({
 defineProps<{
     defaults: {
         expected_arrival: string;
+        expected_time_out: string;
     };
 }>();
 </script>
@@ -126,6 +127,23 @@ defineProps<{
                                 :default-value="defaults.expected_arrival"
                             />
                             <InputError :message="errors.expected_arrival" />
+                        </div>
+                        <div class="grid gap-2">
+                            <Label for="expected_time_out">
+                                Expected time-out *
+                            </Label>
+                            <Input
+                                id="expected_time_out"
+                                name="expected_time_out"
+                                type="time"
+                                required
+                                :default-value="defaults.expected_time_out"
+                            />
+                            <p class="text-xs text-muted-foreground">
+                                Guards and admins are alerted if the visitor is
+                                still inside after this time.
+                            </p>
+                            <InputError :message="errors.expected_time_out" />
                         </div>
                     </div>
 

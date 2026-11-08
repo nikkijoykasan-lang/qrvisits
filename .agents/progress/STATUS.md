@@ -13,6 +13,27 @@
 - **Verified in a real browser:** visitor login → dashboard → "Request a visit" → form → submit → pending visit page; admin approvals page; guard walk-in page and gate scan page, with no JavaScript errors.
 - **Regression tests added:** the request form pages render for the right roles and are hidden from the wrong ones (+3 tests; 218 total in Feature + Unit).
 
+## Change — visitor dashboard refinement
+
+- Refined the visitor dashboard while keeping the dark-green sidebar and white content.
+- Stat cards: clearer hierarchy, larger tabular numbers, icon tiles, short hints and softer borders/shadows; responsive two-column layout on phones.
+- “Your next visit”: added a dark-green pass panel with the QR code, pass code and validity date, plus structured visit details and a primary “View pass” action.
+- Improved empty state with a dedicated QR illustration, explanation and a three-step “request → approve → scan” guide.
+- Recent requests: added a “View all” action, clickable rows, consistent status badges and chevrons; added a compact empty state.
+- Typography, spacing, borders and shadows normalised across the dashboard.
+- Visual-only: no controller, route, validation or data logic changed.
+- Verified with browser screenshots at 1440×900 and 390×844 in light and dark mode; dashboard tests and type/build checks pass.
+
+## Change — expected time-out and automated overdue alerts
+
+- New `visits.expected_time_out` column; required on visitor requests and walk-in registration.
+- A visitor is overdue when still `inside` after the visit date + expected time-out.
+- Guards and admins get an in-app alert: header bell with count, dropdown listing visitor name, pass code (ID), expected time-out and minutes late, plus a warning toast when a new overdue visitor appears.
+- Alerts poll every 30 seconds while the app is open; no scheduler or cron is required. Alerts clear automatically after checkout.
+- Dashboards now show an Overdue stat card; the visit detail page shows an overdue banner.
+- Tests added for overdue detection, alert endpoint access and the new required field.
+- Verified in a real browser: bell badge, dropdown and alert details render with demo overdue data.
+
 ## Change — dark-green and white UI theme
 
 - Reworked the colour palette to dark green + white: deep green sidebar, white content surfaces, green primary actions, subtle green page glow.
@@ -72,7 +93,7 @@
 
 | Check | Result |
 | --- | --- |
-| `php artisan test tests/Feature tests/Unit` | 223 passed, 2 failed (pre-existing ArchTest provider rules) |
+| `php artisan test tests/Feature tests/Unit` | 229 passed, 2 failed (pre-existing ArchTest provider rules) |
 | QRVisits feature tests (visits, approvals, scan, walk-ins, reports, staff, dashboards) | all passing |
 | `npm run test:types` (vue-tsc) | passed |
 | `npx vp lint` | passed |

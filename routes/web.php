@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmergencyListController;
 use App\Http\Controllers\GateController;
 use App\Http\Controllers\LiveBoardController;
+use App\Http\Controllers\OverdueVisitController;
 use App\Http\Controllers\PassScanController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionController;
@@ -55,6 +56,7 @@ Route::middleware(['auth'])->group(function (): void {
     Route::post('gate/scan', PassScanController::class)->name('gate.scan');
     Route::get('gate/board', [LiveBoardController::class, 'index'])->name('gate.board');
     Route::get('emergency-list', EmergencyListController::class)->name('emergency-list');
+    Route::get('alerts/overdue', OverdueVisitController::class)->name('alerts.overdue');
 
     // Reports...
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');

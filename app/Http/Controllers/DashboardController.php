@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\ListOverdueVisits;
 use App\Enums\VisitStatus;
 use App\Models\User;
 use App\Models\Visit;
@@ -14,8 +15,10 @@ use Inertia\Response;
 
 final readonly class DashboardController
 {
-    public function __construct(private VisitPresenter $presenter)
-    {
+    public function __construct(
+        private VisitPresenter $presenter,
+        private ListOverdueVisits $overdueVisits,
+    ) {
         //
     }
 
@@ -78,6 +81,7 @@ final readonly class DashboardController
                     ->where('is_walk_in', true)
                     ->whereDate('visit_date', $today)
                     ->count(),
+                'overdue' => $this->overdueVisits->handle(now())->count(),
             ],
             'pendingVisits' => $this->presenter->collection($pending),
             'insideVisits' => $this->presenter->collection($inside),

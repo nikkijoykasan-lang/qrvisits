@@ -79,17 +79,19 @@ final readonly class VisitController
             'defaults' => [
                 'visitor_contact' => $user->contact_number ?? '',
                 'visit_date' => now()->toDateString(),
+                'expected_time_out' => now()->addHours(4)->format('H:i'),
             ],
         ]);
     }
 
     public function store(CreateVisitRequest $request, #[CurrentUser] User $user, CreateVisit $action): RedirectResponse
     {
-        /** @var array{purpose: string, host_name: string, visit_date: string, visitor_contact: string} $attributes */
+        /** @var array{purpose: string, host_name: string, visit_date: string, expected_time_out: string, visitor_contact: string} $attributes */
         $attributes = $request->safe()->only([
             'purpose',
             'host_name',
             'visit_date',
+            'expected_time_out',
             'visitor_contact',
         ]);
 

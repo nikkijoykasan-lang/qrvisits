@@ -76,8 +76,8 @@ final class DatabaseSeeder extends Seeder
         ]);
 
         foreach ([
-            ['name' => 'Ana dela Cruz', 'purpose' => 'Enrollment inquiry', 'host' => 'Admissions Office', 'arrival' => '10:00'],
-            ['name' => 'Ben Lim', 'purpose' => 'Supplier meeting', 'host' => 'Purchasing Office', 'arrival' => '10:20'],
+            ['name' => 'Ana dela Cruz', 'purpose' => 'Enrollment inquiry', 'host' => 'Admissions Office', 'arrival' => '10:00', 'time_out' => now()->subMinutes(20)->format('H:i')],
+            ['name' => 'Ben Lim', 'purpose' => 'Supplier meeting', 'host' => 'Purchasing Office', 'arrival' => '10:20', 'time_out' => now()->addHours(1)->format('H:i')],
         ] as $entry) {
             $insideVisitor = $this->demoUser(
                 $entry['name'],
@@ -94,6 +94,7 @@ final class DatabaseSeeder extends Seeder
                 'host_name' => $entry['host'],
                 'visit_date' => now()->toDateString(),
                 'expected_arrival' => $entry['arrival'],
+                'expected_time_out' => $entry['time_out'],
                 'approved_by' => $admin->id,
                 'checked_in_by' => $guard->id,
                 'time_in' => now()->subMinutes(35),

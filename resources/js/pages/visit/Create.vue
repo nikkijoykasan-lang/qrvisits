@@ -34,6 +34,7 @@ defineProps<{
     defaults: {
         visitor_contact: string;
         visit_date: string;
+        expected_time_out: string;
     };
 }>();
 </script>
@@ -105,19 +106,39 @@ defineProps<{
                                 <InputError :message="errors.visit_date" />
                             </div>
                             <div class="grid gap-2">
-                                <Label for="visitor_contact">
-                                    Contact number *
+                                <Label for="expected_time_out">
+                                    Expected time-out *
                                 </Label>
                                 <Input
-                                    id="visitor_contact"
-                                    name="visitor_contact"
-                                    type="tel"
+                                    id="expected_time_out"
+                                    name="expected_time_out"
+                                    type="time"
                                     required
-                                    :default-value="defaults.visitor_contact"
-                                    placeholder="09XXXXXXXXX"
+                                    :default-value="defaults.expected_time_out"
                                 />
-                                <InputError :message="errors.visitor_contact" />
+                                <p class="text-xs text-muted-foreground">
+                                    Guards and admins are alerted if you are
+                                    still inside after this time.
+                                </p>
+                                <InputError
+                                    :message="errors.expected_time_out"
+                                />
                             </div>
+                        </div>
+
+                        <div class="grid gap-2">
+                            <Label for="visitor_contact"
+                                >Contact number *</Label
+                            >
+                            <Input
+                                id="visitor_contact"
+                                name="visitor_contact"
+                                type="tel"
+                                required
+                                :default-value="defaults.visitor_contact"
+                                placeholder="09XXXXXXXXX"
+                            />
+                            <InputError :message="errors.visitor_contact" />
                         </div>
 
                         <div class="grid gap-2">

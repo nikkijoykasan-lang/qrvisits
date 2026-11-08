@@ -28,6 +28,7 @@ final class VisitFactory extends Factory
             'host_name' => fake()->randomElement(['Registrar Office', 'Dean of Students', 'Accounting Office', 'IT Department']),
             'visit_date' => now()->toDateString(),
             'expected_arrival' => '09:00',
+            'expected_time_out' => '17:00',
             'status' => VisitStatus::Pending,
             'pass_code' => null,
             'denial_reason' => null,

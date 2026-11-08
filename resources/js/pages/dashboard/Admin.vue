@@ -7,6 +7,7 @@ import {
     ClipboardList,
     ScanLine,
     Siren,
+    TriangleAlert,
     UserCog,
     UserPlus,
     Users,
@@ -116,7 +117,7 @@ const quickActions = [
             </p>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <StatCard
                 label="Pending"
                 :value="stats.pending"
@@ -138,6 +139,12 @@ const quickActions = [
                 label="Checked out today"
                 :value="stats.completed_today"
                 :icon="ScanLine"
+            />
+            <StatCard
+                label="Overdue"
+                :value="stats.overdue"
+                hint="Still inside past expected time-out"
+                :icon="TriangleAlert"
             />
         </div>
 

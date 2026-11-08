@@ -14,6 +14,10 @@ export type Visit = {
     host_name: string;
     visit_date: string;
     expected_arrival: string | null;
+    expected_time_out: string | null;
+    expected_time_out_at: string | null;
+    is_overdue: boolean;
+    overdue_minutes: number;
     status: VisitStatus;
     status_label: string;
     pass_code: string | null;
@@ -38,6 +42,22 @@ export type VisitStats = {
     expected_today: number;
     completed_today: number;
     walk_ins_today: number;
+    overdue: number;
+};
+
+export type OverdueVisitorAlert = {
+    id: string;
+    visitor_name: string;
+    pass_code: string | null;
+    expected_time_out: string;
+    time_in: string | null;
+    minutes_overdue: number;
+    visit_url: string;
+};
+
+export type OverdueAlertResponse = {
+    count: number;
+    visits: OverdueVisitorAlert[];
 };
 
 export type VisitorStats = {

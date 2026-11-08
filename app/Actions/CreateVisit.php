@@ -14,7 +14,7 @@ use Throwable;
 final readonly class CreateVisit
 {
     /**
-     * @param  array{purpose: string, host_name: string, visit_date: string, visitor_contact: string}  $attributes
+     * @param  array{purpose: string, host_name: string, visit_date: string, expected_time_out: string, visitor_contact: string}  $attributes
      */
     public function handle(User $visitor, array $attributes, ?UploadedFile $idDocument = null): Visit
     {
@@ -29,6 +29,7 @@ final readonly class CreateVisit
                 'host_name' => $attributes['host_name'],
                 'visit_date' => $attributes['visit_date'],
                 'expected_arrival' => null,
+                'expected_time_out' => $attributes['expected_time_out'],
                 'status' => VisitStatus::Pending,
                 'is_walk_in' => false,
                 'id_document_path' => $idDocumentPath,
