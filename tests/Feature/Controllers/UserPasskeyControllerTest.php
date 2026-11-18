@@ -52,15 +52,16 @@ it('requires password confirmation to render passkeys page', function (): void {
     $response->assertRedirectToRoute('password.confirm');
 });
 
-it('requires verified email to render passkeys page', function (): void {
-    $user = User::factory()->unverified()->create();
+it('renders the passkeys page without a verified email', function (): void {
+    $user = User::factory()->create(['email_verified_at' => null]);
 
     $this->actingAs($user)->session(['auth.password_confirmed_at' => time()]);
 
     $response = $this->fromRoute('dashboard')
         ->get(route('user-passkey.index'));
 
-    $response->assertRedirectToRoute('verification.notice');
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page->component('user-passkey/Index'));
 });
 
 it('exposes passkey endpoints', function (): void {

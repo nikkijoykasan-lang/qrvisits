@@ -137,14 +137,15 @@ it('renders edit password page', function (): void {
             ->where('passwordRules', PasswordRule::defaults()->toPasswordRulesString()));
 });
 
-it('requires verified email to edit password', function (): void {
-    $user = User::factory()->unverified()->create();
+it('does not require a verified email to edit password', function (): void {
+    $user = User::factory()->create(['email_verified_at' => null]);
 
     $response = $this->actingAs($user)
         ->fromRoute('dashboard')
         ->get(route('password.edit'));
 
-    $response->assertRedirectToRoute('verification.notice');
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page->component('user-password/Edit'));
 });
 
 it('may update password', function (): void {

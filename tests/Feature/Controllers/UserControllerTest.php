@@ -189,9 +189,10 @@ it('redirects authenticated users away from registration', function (): void {
     $response->assertRedirectToRoute('dashboard');
 });
 
-it('requires verified email to delete account', function (): void {
-    $user = User::factory()->unverified()->create([
+it('does not require a verified email to delete account', function (): void {
+    $user = User::factory()->create([
         'password' => Hash::make('password'),
+        'email_verified_at' => null,
     ]);
 
     $response = $this->actingAs($user)
@@ -200,7 +201,7 @@ it('requires verified email to delete account', function (): void {
             'password' => 'password',
         ]);
 
-    $response->assertRedirectToRoute('verification.notice');
+    $response->assertRedirectToRoute('home');
 
-    expect($user->fresh())->not->toBeNull();
+    expect(User::query()->find($user->id))->toBeNull();
 });

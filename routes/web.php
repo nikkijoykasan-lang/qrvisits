@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function (): void {
     Route::patch('settings/profile', [UserProfileController::class, 'update'])->name('user-profile.update');
 });
 
-Route::middleware(['auth', 'verified'])->group(function (): void {
+Route::middleware('auth')->group(function (): void {
     // User...
     Route::delete('user', [UserController::class, 'destroy'])->name('user.destroy');
 
