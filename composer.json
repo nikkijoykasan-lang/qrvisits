@@ -25,6 +25,7 @@
         "laravel/fortify": "^1.41.0",
         "laravel/framework": "^13.37.0",
         "laravel/wayfinder": "^0.1.23",
+        "league/flysystem-aws-s3-v3": "^3.35",
         "nunomaduro/essentials": "^1.2.0"
     },
     "require-dev": {
