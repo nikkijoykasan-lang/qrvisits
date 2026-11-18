@@ -10,12 +10,14 @@ import {
     Clock3,
     QrCode,
     Ticket,
+    UserPlus,
 } from '@lucide/vue';
 import {
     create,
     index,
     show,
 } from '@/actions/App/Http/Controllers/VisitController';
+import { create as walkInCreate } from '@/actions/App/Http/Controllers/WalkInController';
 import StatCard from '@/components/StatCard.vue';
 import { Button } from '@/components/ui/button';
 import {
@@ -76,12 +78,25 @@ const user = usePage().props.auth.user;
                     Request a campus visit and show your QR pass at the gate.
                 </p>
             </div>
-            <Button size="lg" class="shadow-sm" as-child>
-                <Link :href="create()">
-                    <CalendarPlus class="size-4" />
-                    Request a visit
-                </Link>
-            </Button>
+            <div class="flex flex-wrap gap-2">
+                <Button
+                    variant="outline"
+                    size="lg"
+                    class="bg-background shadow-sm"
+                    as-child
+                >
+                    <Link :href="walkInCreate()">
+                        <UserPlus class="size-4" />
+                        Walk-in pass
+                    </Link>
+                </Button>
+                <Button size="lg" class="shadow-sm" as-child>
+                    <Link :href="create()">
+                        <CalendarPlus class="size-4" />
+                        Request a visit
+                    </Link>
+                </Button>
+            </div>
         </div>
 
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">

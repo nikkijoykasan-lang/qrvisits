@@ -5,15 +5,16 @@
 - Submits a visit request: purpose, person/department to visit, visit date, and a valid ID upload.
 - Sees the status of each request and the QR pass once approved.
 - Shows the QR pass at the gate.
+- Registers themselves as a **walk-in** from the portal when arriving without a pre-registered visit; the pass is issued immediately.
 - Can cancel a request that is still pending.
 - Sees only their own requests and passes.
 
 ## Guard
 - Scans a visitor's QR pass at the gate: first scan records time-in, next scan records time-out.
 - Can type a pass code manually when the camera or QR is not readable.
-- Registers walk-in visitors who arrive without pre-registering.
 - Sees the live "inside now" board and today's expected visitors.
 - Sees basic visitor details and contact numbers for approved visits, but cannot approve, deny or edit them.
+- Does **not** register walk-ins; visitors self-register through the portal.
 
 ## Admin
 - Reviews pending visit requests and approves or denies them (with a reason).

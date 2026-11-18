@@ -53,6 +53,14 @@ const mainNavItems = computed<NavItem[]>(() => {
         },
     ];
 
+    if (role.value === 'visitor') {
+        items.push({
+            title: 'Walk-in pass',
+            href: walkInCreate(),
+            icon: UserPlus,
+        });
+    }
+
     if (role.value === 'admin') {
         items.push({
             title: 'Approvals',
@@ -72,11 +80,6 @@ const mainNavItems = computed<NavItem[]>(() => {
                 title: 'Live board',
                 href: liveBoardIndex(),
                 icon: Users,
-            },
-            {
-                title: 'Register walk-in',
-                href: walkInCreate(),
-                icon: UserPlus,
             },
             {
                 title: 'Emergency list',

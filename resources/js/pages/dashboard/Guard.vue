@@ -6,7 +6,6 @@ import {
     ScanLine,
     Siren,
     TriangleAlert,
-    UserPlus,
     Users,
 } from '@lucide/vue';
 import EmergencyListController from '@/actions/App/Http/Controllers/EmergencyListController';
@@ -17,7 +16,6 @@ import {
     index as visitsIndex,
     show,
 } from '@/actions/App/Http/Controllers/VisitController';
-import { create as walkInCreate } from '@/actions/App/Http/Controllers/WalkInController';
 import EmptyState from '@/components/EmptyState.vue';
 import StatCard from '@/components/StatCard.vue';
 import { Button } from '@/components/ui/button';
@@ -69,12 +67,6 @@ const quickActions = [
         icon: Users,
     },
     {
-        title: 'Register walk-in',
-        description: 'Visitors without a pass',
-        href: walkInCreate(),
-        icon: UserPlus,
-    },
-    {
         title: 'Emergency list',
         description: 'Printable list of everyone inside',
         href: EmergencyListController(),
@@ -90,7 +82,7 @@ const quickActions = [
         <div>
             <h1 class="text-xl font-semibold">Guard dashboard</h1>
             <p class="text-sm text-muted-foreground">
-                Scan passes, register walk-ins, and watch who is on campus.
+                Scan passes and watch who is on campus.
             </p>
         </div>
 

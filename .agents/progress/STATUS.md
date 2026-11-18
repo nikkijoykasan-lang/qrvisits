@@ -2,7 +2,7 @@
 
 **Phase:** implemented, verified by automated tests
 **Plan:** `.agents/plans/qrvisits-implementation-plan.md`
-**Last updated:** 2026-10-24
+**Last updated:** 2026-11-15
 
 ## Recent fix — "Request a visit" button did nothing
 
@@ -12,6 +12,17 @@
 - **Also fixed:** a stale `public/hot` file left behind by a crashed Vite dev server made Inertia try to reach a server-sent-rendering process; removed. If tests ever fail with `__inertia_ssr` errors, delete `public/hot`.
 - **Verified in a real browser:** visitor login → dashboard → "Request a visit" → form → submit → pending visit page; admin approvals page; guard walk-in page and gate scan page, with no JavaScript errors.
 - **Regression tests added:** the request form pages render for the right roles and are hidden from the wrong ones (+3 tests; 218 total in Feature + Unit).
+
+## Change — self-service walk-ins
+
+- Visitors now register walk-ins themselves from the portal (**Walk-in pass** in the sidebar and on the visitor dashboard).
+- The walk-in pass is issued immediately (auto-approved), so the guard can scan it at the gate without admin action.
+- The visitor's name is taken from their account; they can confirm/correct their contact number.
+- Removed the **Register walk-in** option and form access from guards and admins; the sidebar, guard dashboard and admin dashboard no longer offer it.
+- Staff who try the walk-in URL directly get “not found”.
+- Dashboard/profile fields and expected time-out are reused for walk-ins.
+- Tests updated: visitor self-registration, auto-issued pass, validation and staff denial.
+- Visual-only + workflow change; no other visit logic changed.
 
 ## Change — visitor dashboard refinement
 

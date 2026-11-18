@@ -22,7 +22,7 @@ Visitors are logged in a paper notebook at the guard house. Handwriting is slow,
 - Visitors register an account and request a visit for a specific date, including a valid ID upload.
 - Admin approves or denies requests and issues QR passes.
 - Guards scan passes with a webcam, with manual code entry as a fallback.
-- Walk-in visitors are registered by the guard and approved by the admin.
+- Walk-in visitors register themselves through the portal and receive a pass immediately.
 - Live "inside now" board, printable emergency list, visit history and simple reports.
 - Guard/admin accounts are created by the admin.
 

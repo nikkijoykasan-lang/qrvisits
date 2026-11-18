@@ -224,6 +224,12 @@ onBeforeUnmount(() => {
                     <div class="min-w-0">
                         <p class="truncate text-sm font-medium">
                             {{ visit.visitor_name }}
+                            <span
+                                v-if="visit.is_walk_in"
+                                class="ml-1 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-amber-800 uppercase dark:bg-amber-950 dark:text-amber-300"
+                            >
+                                Walk-in
+                            </span>
                         </p>
                         <p class="truncate text-xs text-muted-foreground">
                             {{ visit.purpose }} · {{ visit.host_name }}

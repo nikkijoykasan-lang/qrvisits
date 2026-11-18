@@ -15,7 +15,7 @@ final class ShowWalkInCreateRequest extends FormRequest
         $user = $this->user();
         assert($user instanceof User);
 
-        return $user->isStaff()
+        return $user->isVisitor()
             ? Response::allow()
             : Response::denyAsNotFound();
     }

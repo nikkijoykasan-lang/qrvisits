@@ -22,7 +22,6 @@ import {
     index as visitsIndex,
     show,
 } from '@/actions/App/Http/Controllers/VisitController';
-import { create as walkInCreate } from '@/actions/App/Http/Controllers/WalkInController';
 import EmptyState from '@/components/EmptyState.vue';
 import StatCard from '@/components/StatCard.vue';
 import { Button } from '@/components/ui/button';
@@ -78,12 +77,6 @@ const quickActions = [
         description: 'See who is inside now',
         href: liveBoardIndex(),
         icon: Users,
-    },
-    {
-        title: 'Register walk-in',
-        description: 'Visitors without a pass',
-        href: walkInCreate(),
-        icon: UserPlus,
     },
     {
         title: 'Emergency list',

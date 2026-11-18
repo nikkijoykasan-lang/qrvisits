@@ -8,16 +8,20 @@ use App\Enums\VisitStatus;
 use App\Models\User;
 use App\Models\Visit;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 final readonly class ApproveVisit
 {
+    public function __construct(private GeneratePassCode $passCodes)
+    {
+        //
+    }
+
     public function handle(Visit $visit, User $approver): Visit
     {
         return DB::transaction(function () use ($visit, $approver): Visit {
             $visit->forceFill([
                 'status' => VisitStatus::Approved,
-                'pass_code' => $visit->pass_code ?? $this->generatePassCode(),
+                'pass_code' => $visit->pass_code ?? $this->passCodes->handle(),
                 'approved_at' => now(),
                 'approved_by' => $approver->id,
                 'denial_reason' => null,
@@ -25,14 +29,5 @@ final readonly class ApproveVisit
 
             return $visit->refresh();
         });
-    }
-
-    private function generatePassCode(): string
-    {
-        do {
-            $code = Str::upper(Str::random(8));
-        } while (Visit::query()->where('pass_code', $code)->exists());
-
-        return $code;
     }
 }

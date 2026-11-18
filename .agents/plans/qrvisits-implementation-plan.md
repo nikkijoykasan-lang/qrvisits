@@ -158,3 +158,14 @@ Unit tests:
 - [x] Overdue banner on visit details; alerts clear after checkout.
 - [x] Tests for detection, access control and validation.
 
+
+## 12. Feature addition - self-service walk-ins
+
+- [x] Move walk-in registration from guards to visitors.
+- [x] Auto-approve walk-ins and issue a pass immediately.
+- [x] Prefill visitor identity from the account; keep contact editable.
+- [x] Remove walk-in links from guard/admin navigation and dashboards.
+- [x] Deny staff access to walk-in endpoints.
+- [x] Show walk-in tag on today's expected list so guards notice them.
+- [x] Update tests and documentation.
+

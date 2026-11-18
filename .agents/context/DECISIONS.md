@@ -7,7 +7,7 @@
 - **D3 — Main pain point:** paper logbook at the guard house is slow and causes queues.
 - **D4 — Roles:** guards and an admin operate the system. Visitors also have their own accounts and pre-register.
 - **D5 — Approval:** the admin approves or denies every visit request before a pass is issued.
-- **D6 — Walk-ins:** the guard registers a walk-in on the spot and the admin approves it quickly.
+- **D6 — Walk-ins:** visitors register walk-ins themselves through the portal. The guard no longer creates walk-in records. The pass is issued immediately so it can be scanned at the gate.
 - **D7 — Visitor data:** basic details only — full name, contact number, purpose, person/department to visit, date, time-in and time-out. A **valid ID document upload** was added at the user's request; no visitor photo is taken and no ID number is typed in.
 - **D8 — Live monitoring:** the live "who is inside now" view and a printable emergency list are essential.
 - **D9 — Devices:** desktop/laptop with webcam at the guard house; admin uses an office computer.
@@ -24,7 +24,10 @@
 - **T7 — Roles:** stored as a `role` string column on `users`, cast to a PHP enum.
 - **T8 — PHP version:** the project targets PHP 8.4 (`composer.json` `^8.4.0`, `.php-version` set to `8.4`) so it runs on the PHP version bundled with Herd. No installed package requires PHP 8.5.
 - **T9 — ID document storage:** uploaded IDs are stored on the private `local` disk under `visitor-ids/`, never in the public folder. They are served through an authorised route to the visitor who owns the visit and to staff only. Uploads accept JPG, PNG or PDF up to 2 MB (the server's current upload limit). Files are deleted when a pending request is cancelled.
-- **T10 — Expected time-out and overdue alerts:** `visits.expected_time_out` is required on new visitor requests and walk-ins. A visit is overdue when its status is `inside` and the current time is past the visit date + expected time-out. The guard/admin header polls `/alerts/overdue` every 30 seconds and shows a bell badge, dropdown and warning toast with visitor name, pass code, expected time-out and minutes late. Alerts disappear once the visitor is checked out. This requires no scheduler.
+
+- **T10 - Expected time-out and overdue alerts:** `visits.expected_time_out` is required on new visitor requests and walk-ins. A visit is overdue when its status is `inside` and the current time is past the visit date + expected time-out. The guard/admin header polls `/alerts/overdue` every 30 seconds and shows a bell badge, dropdown and warning toast with visitor name, pass code, expected time-out and minutes late. Alerts disappear once the visitor is checked out. This requires no scheduler.
+
+- **T11 - Self-service walk-ins:** walk-ins are visitor-initiated, auto-approved, and issued a pass immediately (`status = approved`, unique pass code). The visitor's name comes from their account; contact number can be corrected on the form. Guards only scan the pass, and staff access to the walk-in form is denied.
 
 ## Assumptions
 

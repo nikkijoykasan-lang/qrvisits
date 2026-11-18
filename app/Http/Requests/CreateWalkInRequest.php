@@ -15,7 +15,7 @@ final class CreateWalkInRequest extends FormRequest
         $user = $this->user();
         assert($user instanceof User);
 
-        return $user->isStaff()
+        return $user->isVisitor()
             ? Response::allow()
             : Response::denyAsNotFound();
     }
@@ -26,11 +26,9 @@ final class CreateWalkInRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'visitor_name' => ['required', 'string', 'max:255'],
             'visitor_contact' => ['required', 'string', 'min:7', 'max:20', 'regex:/^[0-9+()\-\s]+$/'],
             'purpose' => ['required', 'string', 'max:255'],
             'host_name' => ['required', 'string', 'max:255'],
-            'expected_arrival' => ['nullable', 'date_format:H:i'],
             'expected_time_out' => ['required', 'date_format:H:i'],
         ];
     }

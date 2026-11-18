@@ -16,14 +16,14 @@ Status values: `planned`, `in progress`, `done`, `deferred`.
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Visitor submits a visit request | done | Purpose, host, date, contact number, valid ID |
-| Visitor sets an expected time-out | done | Required on visitor requests; guards set it for walk-ins |
+| Visitor sets an expected time-out | done | Required on visitor requests and self-service walk-ins |
 | Visitor uploads a valid ID | done | JPG, PNG or PDF up to 2 MB; stored privately; visible to the owner and staff |
 | Admin approves a request and issues a pass | done | Random pass code generated at approval |
 | Admin denies a request with a reason | done | Reason shown to the visitor |
 | Visitor views and prints a QR pass | done | QR generated server-side as an SVG data URI |
 | Pass valid only for its visit date | done | Guard sees a clear "wrong date" message |
 | Visitor cancels a pending request | done | Only while pending |
-| Guard registers a walk-in visitor | done | Guard enters basic details; admin approves |
+| Visitor self-registers a walk-in | done | QR pass issued immediately; guard only scans it at the gate |
 
 ## Gate and monitoring
 
