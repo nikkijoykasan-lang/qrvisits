@@ -9,6 +9,7 @@ use App\Actions\UpdateUserPassword;
 use App\Http\Requests\CreateUserPasswordRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Models\User;
+use App\Support\PasswordRules;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ final readonly class UserPasswordController
         return Inertia::render('user-password/Create', [
             'email' => $request->email,
             'token' => $request->route('token'),
-            'passwordRules' => PasswordRule::defaults()->toPasswordRulesString(),
+            'passwordRules' => PasswordRules::toHtmlString(PasswordRule::defaults()),
         ]);
     }
 
@@ -49,7 +50,7 @@ final readonly class UserPasswordController
     public function edit(): Response
     {
         return Inertia::render('user-password/Edit', [
-            'passwordRules' => PasswordRule::defaults()->toPasswordRulesString(),
+            'passwordRules' => PasswordRules::toHtmlString(PasswordRule::defaults()),
         ]);
     }
 

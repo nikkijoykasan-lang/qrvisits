@@ -11,6 +11,7 @@ use App\Http\Requests\CreateStaffAccountRequest;
 use App\Http\Requests\DeleteStaffAccountRequest;
 use App\Http\Requests\ListStaffAccountRequest;
 use App\Models\User;
+use App\Support\PasswordRules;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
@@ -41,7 +42,7 @@ final readonly class StaffAccountController
     public function create(ListStaffAccountRequest $request): Response
     {
         return Inertia::render('staff/Create', [
-            'passwordRules' => Password::defaults()->toPasswordRulesString(),
+            'passwordRules' => PasswordRules::toHtmlString(Password::defaults()),
             'roles' => [
                 ['value' => Role::Guard->value, 'label' => Role::Guard->label()],
                 ['value' => Role::Admin->value, 'label' => Role::Admin->label()],

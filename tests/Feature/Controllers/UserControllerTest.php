@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use App\Support\PasswordRules;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ it('renders registration page', function (): void {
     $response->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('user/Create')
-            ->where('passwordRules', Password::defaults()->toPasswordRulesString()));
+            ->where('passwordRules', PasswordRules::toHtmlString(Password::defaults())));
 });
 
 it('may register a new user', function (): void {

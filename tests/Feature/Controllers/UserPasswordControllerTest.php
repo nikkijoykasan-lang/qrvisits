@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use App\Support\PasswordRules;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,7 @@ it('renders reset password page', function (): void {
             ->component('user-password/Create')
             ->has('email')
             ->has('token')
-            ->where('passwordRules', PasswordRule::defaults()->toPasswordRulesString()));
+            ->where('passwordRules', PasswordRules::toHtmlString(PasswordRule::defaults())));
 });
 
 it('may reset password', function (): void {
@@ -134,7 +135,7 @@ it('renders edit password page', function (): void {
     $response->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('user-password/Edit')
-            ->where('passwordRules', PasswordRule::defaults()->toPasswordRulesString()));
+            ->where('passwordRules', PasswordRules::toHtmlString(PasswordRule::defaults())));
 });
 
 it('does not require a verified email to edit password', function (): void {

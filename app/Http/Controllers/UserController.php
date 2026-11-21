@@ -9,6 +9,7 @@ use App\Actions\DeleteUser;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\DeleteUserRequest;
 use App\Models\User;
+use App\Support\PasswordRules;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ final readonly class UserController
     public function create(): Response
     {
         return Inertia::render('user/Create', [
-            'passwordRules' => Password::defaults()->toPasswordRulesString(),
+            'passwordRules' => PasswordRules::toHtmlString(Password::defaults()),
         ]);
     }
 

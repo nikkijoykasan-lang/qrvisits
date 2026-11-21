@@ -34,7 +34,15 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        @fonts
+        @php
+            $fontsManifestPath = public_path('build/fonts-manifest.json');
+            $fontsStyle = is_file($fontsManifestPath)
+                ? (json_decode((string) file_get_contents($fontsManifestPath), true)['style']['file'] ?? null)
+                : null;
+        @endphp
+        @if ($fontsStyle)
+            <link rel="stylesheet" href="{{ asset('build/'.$fontsStyle) }}">
+        @endif
 
         @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
         <x-inertia::head>

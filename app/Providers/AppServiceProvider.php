@@ -13,16 +13,16 @@ final class AppServiceProvider extends ServiceProvider
         //
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->configureTelescope();
     }
 
-    public function configureTelescope() : void
+    public function configureTelescope(): void
     {
         if ($this->app->environment('local') && class_exists(\Laravel\Telescope\TelescopeServiceProvider::class)) {
-              $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-              $this->app->register(TelescopeServiceProvider::class);
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
         }
     }
 }
